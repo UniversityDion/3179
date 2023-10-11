@@ -1,0 +1,112 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 400,
+  "height": 400,
+  "title": "Hapiness, Human development and Beers ",
+  "data": {"url": "data/HappinessAlcoholConsumption.csv"},
+  "params": [
+    {
+    "name": "Region_selection",
+    "bind": {
+      "input": "select",
+      "options": [
+      null,
+      "North America",
+      "Latin America and Caribbean",
+      "Western Europe",
+      "Central and Eastern Europe",
+      "Sub-Saharan Africa",
+      "Southeastern Asia",
+      "Eastern Asia",
+      "Australia and New Zealand"
+      ],
+      "labels":[
+      "Show All",
+      "North America",
+      "Latin America and Caribbean",
+      "Western Europe",
+      "Central and Eastern Europe",
+      "Sub-Saharan Africa",
+      "Southeastern Asia",
+      "Eastern Asia",
+      "Australia and New Zealand"
+      ],
+      "name": "Region Selection: "
+      }
+      }
+      ],
+      
+  "transform": [
+  
+  {"filter": "Region_selection == null || datum.Region == Region_selection"}
+  ],
+  
+ 
+  "encoding": {
+    "x": {
+      "field": "HDI",
+      "type": "quantitative",
+      "scale": {
+        "domain": [350, 1000]}
+      
+    },
+    "y": {
+      "field": "HappinessScore",
+      "type": "quantitative",
+      "title":"Happiness Score",
+      "scale": {
+        "domain": [3, 8]}
+      }
+      
+
+      
+    },
+    "layer":[{
+    "mark": "circle",  
+    "encoding":  {
+      
+    "color": {
+      "field": "Region",
+      "type": "nominal"
+    },
+    "size": {
+      "field": "Beer_PerCapita",
+      "type": "quantitative",
+      "title": "Beers Per Capita"
+    },
+    "tooltip": [
+    {"field": "Country", "type": "nominal"},
+    {"field": "Beer_PerCapita", "type": "quantitative","title":"Beers per capita", "format": ","},
+    {"field": "HDI", "type": "quantitative", "format": ","}
+    ]}},
+
+    {
+      "mark": {
+      "type": "text",
+      "align": "right",
+      "baseline": "middle",
+      "dx": -20,
+      "fontSize": 10,
+      "fontStyle": "italic"
+      },
+      "encoding": {
+      "text": {"field": "Country", "type": "nominal"},
+      "color": {"value": "black"},
+      "opacity": {
+        "condition": {
+          "test": "datum['Country'] == 'China' || datum['Country'] == 'Australia' || datum['Country'] =='New Zealand' || datum['Country'] == 'United States'",
+          "value": 1
+          },
+          "value": 0
+          },
+          "tooltip": [
+            {"field": "Country", "type": "nominal"},
+            {"field": "Beer_PerCapita", "type": "quantitative","title":"Beers per capita", "format": ","},
+            {"field": "HDI", "type": "quantitative", "format": ","}
+          ]}}
+          
+
+  ]
+  }
+  
+
