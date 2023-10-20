@@ -1,0 +1,17 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "data": { "url": "data/injuries.csv" },
+  "mark": "bar",
+  "transform": [
+    {"calculate": "datum.Count", "as":"Count"}
+  ],
+  "encoding": {
+      "x": { "timeUnit": "year", "field": "Year", "type": "ordinal", "title":null },
+      "y": { "aggregate": "sum", "field": "Count", "title": "Injuries" },
+      "color": { 
+        "field": "Gender",
+        "type": "nominal",
+        "scale":{"range": ["#f57feb","#00aeff"]} }
+  }
+}
